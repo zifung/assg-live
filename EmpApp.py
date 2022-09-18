@@ -28,7 +28,7 @@ def home():
 
 @app.route("/about", methods=['POST'])
 def about():
-    return render_template('www.intellipaat.com')
+    return render_template('AboutUs.html')
 
 
 @app.route("/addemp", methods=['POST'])
@@ -36,8 +36,8 @@ def AddEmp():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
-    department = request.form['pri_skill']
-    address = request.form['location']
+    department = request.form['department']
+    address = request.form['address']
     emp_image_file = request.files['emp_image_file']
 
     insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
