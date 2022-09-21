@@ -99,7 +99,6 @@ def FetchData():
         details = cursor.fetchall()
 
         if request.method == 'POST':
-           details = db_conn.get_details()
            print(details)
            for detail in details:
                var = detail
