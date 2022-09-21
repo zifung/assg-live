@@ -89,19 +89,5 @@ def AddEmp():
     print("all modification done...")
     return render_template('AddEmpOutput.html', name=emp_name)
 
-@app.route('/getempoutput', methods=['POST'])
-def GetEmp():
-    cursor = db_conn.cursor()
-    cursor.execute("SELECT * FROM employee")
-    details = cursor.fetchall()
-    return details
-
-    if request.method == 'POST':
-       details = db_conn.get_details()
-       print(details)
-       for detail in details:
-           var = detail
-       return render_template('AddEmpOutput.html', var=var)
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
