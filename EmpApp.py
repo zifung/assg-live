@@ -100,8 +100,7 @@ def FetchData():
 
         if request.method == 'POST':
            print(details)
-           for detail in details:
-               var = detail
+           var = details
     
     finally:
         cursor.close()
