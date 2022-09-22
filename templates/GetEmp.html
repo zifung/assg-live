@@ -1,29 +1,110 @@
-	<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Get Employee Information</title>
+<title>Get Employee Details</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: #666;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+  float: left;
+  width: 20%;
+  height: 450px;
+  background: #ccc;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+detail {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background-color: #f1f1f1;
+  height: 300px; /* only for demonstration, should be removed */
+}
+
+/* Clear floats after the columns */
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav, detail {
+    width: 100%;
+    height: auto;
+  }
+}
+</style>
 </head>
-<center>
-	<font color="black" size="5" style="font-family: avenir">
+<body>
 
-		<h1 style="color: DodgerBlue">Employee Information</h1>
+<header>
+  <h2>Get Employee Information</h2>
+</header>
 
-		<body bgcolor="lightgrey">
+<section>
+  <nav>
+    <ul>
+      <li><a href="#">Attendance</a></li>
+      <li><a href="/editot">Check Employee Salary</a></li>
+      <li><a href="/getemp">Get Employees Details</a></li>
+    </ul>
+  </nav>
 
-			<form action="/fetchdata" autocomplete="on" method="POST">
+  <detail>
 
-				<h2 style="color: grey">Enter Employee ID</h2>
+		<form action="/fetchdata" autocomplete="on" method="POST">
 
-		  		Employee ID:<br> <input style="height:25px;font-size:14pt;" type="number" name="emp_id" autofocus size="40"><br><br>
+			<h2 style="color: black">Enter Employee ID</h2>
 
+			  Employee ID:<br> <input style="height:25px;font-size:14pt;" type="number" name="emp_id" autofocus size="40"></br></br></br></br></br></br></br></br>
 
-		  		<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">FETCH INFO</button><br><br>
+			  <button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">FETCH INFO</button><br><br>
 
-		  		<button type="submit" formaction="http://3.134.115.108:80/" style="background: white	; height: 45px; width: 200px; color: black; size: 5; font:oblique;" method="GET">GO TO UPDATE DATABASE PAGE</button>
+			  <button type="submit" formaction="http://3.134.115.108:80/" style="background: white	; height: 45px; width: 200px; color: black; size: 5; font:oblique;" method="GET">GO TO UPDATE DATABASE PAGE</button>
 
-			</form>
+		</form>
 
-		</body>
-	</font>
-</center>
+  </detail>
+
+</section>
+
+<footer>
+  <a href="/about">About Us</a>
+</footer>
+
+</body>
 </html>
