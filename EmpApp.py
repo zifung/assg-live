@@ -182,7 +182,7 @@ def FetchData():
 
     try:
         cursor.execute(retreive_sql)
-        details = cursor.fetchall()
+        details = cursor.fetchone()
 
         if request.method == 'POST':
            print(details)
