@@ -176,20 +176,21 @@ def checksalary():
 
 @app.route('/fetchdata', methods=['POST'])
 def FetchData():
-    emp_id = request.form['emp_id']
-    retreive_sql = ('SELECT * FROM employee WHERE emp_id = %s', (emp_id))
-    cursor = db_conn.cursor()
+    if request.method == 'POST' and 'emp_id' in request.form:
+        emp_id = request.form['emp_id']
+        retreive_sql = ('SELECT * FROM employee WHERE emp_id = %s', (emp_id))
+        cursor = db_conn.cursor()
 
-    try:
-        cursor.execute(retreive_sql)
-        details = cursor.fetchone()
+        try:
+            cursor.execute(retreive_sql)
+            details = cursor.fetchone()
 
-        if request.method == 'POST':
-           print(details)
-           var = details
+            if request.method == 'POST':
+               print(details)
+               var = details
     
-    finally:
-        cursor.close()
+        finally:
+            cursor.close()
 
     return render_template('GetEmpOutput.html', var=var)
 
