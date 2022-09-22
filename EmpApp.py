@@ -179,15 +179,20 @@ def FetchData():
     if request.method == 'POST' and 'emp_id' in request.form:
         emp_id = request.form['emp_id']
         cursor = db_conn.cursor()
-        cursor.execute('SELECT * FROM employee WHERE emp_id = %s', (emp_id))
-        details = cursor.fetchone()
+        
+        cursor.execute('SELECT emp_id FROM employee WHERE emp_id = %s', (emp_id))
+        empid = cursor.fetchone()
+
+        cursor.execute('SELECT first_name FROM employee WHERE emp_id = %s', (emp_id))
+        Fname = cursor.fetchone()
 
         if request.method == 'POST':
-            print(details)
-            var = details
+            print(empid, Fname)
+            id = empid
+            fname = Fname
         cursor.close()
 
-    return render_template('GetEmpOutput.html', var=var)
+    return render_template('GetEmpOutput.html', id=id, fname=fname)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
