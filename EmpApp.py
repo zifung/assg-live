@@ -179,7 +179,7 @@ def FetchData():
     if request.method == 'POST' and 'emp_id' in request.form:
         emp_id = request.form['emp_id']
         cursor = db_conn.cursor()
-        cursor.execute = ('SELECT * FROM employee WHERE emp_id = %s', (emp_id))
+        cursor.execute('SELECT * FROM employee WHERE emp_id = %s', (emp_id))
         details = cursor.fetchone()
 
         if request.method == 'POST':
