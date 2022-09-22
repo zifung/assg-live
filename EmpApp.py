@@ -176,7 +176,8 @@ def checksalary():
 
 @app.route('/fetchdata', methods=['POST'])
 def FetchData():
-    retreive_sql = ("SELECT * FROM employee")
+    emp_id = request.form['emp_id']
+    retreive_sql = ('SELECT * FROM employee WHERE emp_id = %s', (emp_id))
     cursor = db_conn.cursor()
 
     try:
