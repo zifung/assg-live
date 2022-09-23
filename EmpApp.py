@@ -184,7 +184,7 @@ def checksalary():
 
 @app.route('/fetchdata', methods=['POST'])
 def FetchData():
-    if request.method == 'POST' and 'emp_id' in request.form:
+    if request.method == 'POST' and 'emp_id' and 'emp_image_file' in request.form:
         emp_id = request.form['emp_id']
         cursor = db_conn.cursor()
         cursor.execute('SELECT emp_id FROM employee WHERE emp_id = %s', (emp_id))
