@@ -247,7 +247,7 @@ def FetchData():
         custombucket,
         emp_image_file_url)
 
-    image_url = s3.Bucket(custombucket).get_object(Key=emp_image_file_url, Body=emp_image_file)
+    image_url = object_url
 
     return render_template('GetEmpOutput.html', id=id, fname=fname, lname=lname, department=department, address=address, anleave=anleave, medleave=medleave, unleave=unleave, othour=othour, salary=salary, image_url=image_url)
 
