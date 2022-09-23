@@ -237,7 +237,7 @@ def DeleteData():
     if request.method == 'POST' and 'emp_id' in request.form:
         emp_id = request.form['emp_id']
         cursor = db_conn.cursor()
-        cursor.execute('DELETE * FROM employee WHERE emp_id = %s', (emp_id))
+        cursor.execute('DELETE FROM employee WHERE emp_id = %s', (emp_id))
         db_conn.commit()
 
     return render_template('GetEmp.html')
