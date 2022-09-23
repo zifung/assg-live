@@ -186,6 +186,7 @@ def checksalary():
 def FetchData():
     if request.method == 'POST' and 'emp_id' and 'emp_image_file' in request.form:
         emp_id = request.form['emp_id']
+        emp_image_file = request.files['emp_image_file']
         cursor = db_conn.cursor()
         cursor.execute('SELECT emp_id FROM employee WHERE emp_id = %s', (emp_id))
         empid = cursor.fetchone()
@@ -230,7 +231,6 @@ def FetchData():
             salary = Salary
         cursor.close()
 
-     emp_image_file = request.files['emp_image_file']
     emp_image_file_url = "emp-id-" + str(emp_id) + "_image_file"
     s3 = boto3.resource('s3')
     s3.Bucket(custombucket).get_object(Key=emp_image_file_url, Body=emp_image_file)
