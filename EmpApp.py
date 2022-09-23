@@ -219,11 +219,8 @@ def FetchData():
 
         s3 = boto3.resource('s3')
         s3_object = s3.Bucket(custombucket).Object("emp-id-" + str(emp_id) + "_image_file").get()
-        Image_url = s3_object['Metadata'].read().decode()
-
-        image_url=Image_url
-
-        
+        image_url = s3_object
+ 
         if request.method == 'POST':
             id = empid
             fname = Fname
