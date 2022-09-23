@@ -230,7 +230,27 @@ def FetchData():
             salary = Salary
         cursor.close()
 
-    return render_template('GetEmpOutput.html', id=id, fname=fname, lname=lname, department=department, address=address, anleave=anleave, medleave=medleave, unleave=unleave, othour=othour, salary=salary)
+     emp_image_file = request.files['emp_image_file']
+    emp_image_file_url = "emp-id-" + str(emp_id) + "_image_file"
+    s3 = boto3.resource('s3')
+    s3.Bucket(custombucket).get_object(Key=emp_image_file_url, Body=emp_image_file)
+    bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+    s3_location = (bucket_location['LocationConstraint'])
+
+    if s3_location is None:
+        s3_location = ''
+    else:
+        s3_location = '-' + s3_location
+
+    object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+        s3_location,
+        custombucket,
+        emp_image_file_url)
+
+    image_url = s3.Bucket(custombucket).get_object(Key=emp_image_file_url, Body=emp_image_file)
+
+    return render_template('GetEmpOutput.html', id=id, fname=fname, lname=lname, department=department, address=address, anleave=anleave, medleave=medleave, unleave=unleave, othour=othour, salary=salary, image_url=image_url)
+
 
 @app.route('/removedata', methods=['POST'])
 def DeleteData():
