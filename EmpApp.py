@@ -39,7 +39,7 @@ def back():
     return render_template('AddEmp.html')
 
 @app.route("/deletedata", methods=['GET', 'POST'])
-def back():
+def delete():
     return render_template('RemEmp.html')
 
 
