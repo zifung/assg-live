@@ -248,7 +248,7 @@ def filedownload():
             Params = {'Bucket': custombucket, 'Key':emp_image_file_name_in_s3},
             ExpiresIn = 3600
         )
-        print(+ url)
+        print(url)
 
         
 @app.route('/removedata', methods=['POST'])
