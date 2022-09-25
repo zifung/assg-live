@@ -239,7 +239,7 @@ def filedownload():
         empid = request.form['emp_id']
         cursor = db_conn.cursor()
         cursor.execute('SELECT emp_id FROM employee WHERE emp_id = %s', (empid))
-        emp_id = cursor.fetchone()
+        emp_id = cursor.fetchall()
 
         emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
 
