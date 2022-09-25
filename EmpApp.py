@@ -239,9 +239,12 @@ def filedownload():
         empid = request.form['emp_id']
         cursor = db_conn.cursor()
         cursor.execute('SELECT emp_id FROM employee WHERE emp_id = %s', (empid))
-        emp_id = cursor.fetchall()
+        emp_id = cursor.fetchone()
 
-        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+        for row in emp_id:
+            empID = row[0]
+
+        emp_image_file_name_in_s3 = "emp-id-" + str(empID) + "_image_file"
 
         url = boto3.client('s3').generate_presigned_url(
             ClientMethod = 'get_object',
