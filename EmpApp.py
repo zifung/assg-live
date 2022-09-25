@@ -1,4 +1,6 @@
+
 from crypt import methods
+from urllib import response
 from flask import Flask, render_template, request
 from pymysql import connections
 import os
@@ -217,12 +219,8 @@ def FetchData():
         cursor.execute('SELECT basic_salary FROM employee WHERE emp_id = %s', (emp_id))
         Salary = cursor.fetchone()
 
-        s3 = boto3.resource('s3')
-        s3_object = s3.Bucket(custombucket).Object("emp-id-" + str(emp_id) + "_image_file").get()
-        Image_url = s3_object['Body'].read().decode('UTF-16','strict')
-
-        image_url=Image_url
- 
+        image_url = filedownload()
+        
         if request.method == 'POST':
             id = empid
             fname = Fname
@@ -237,6 +235,22 @@ def FetchData():
             
     return render_template('GetEmpOutput.html', id=id, fname=fname, lname=lname, department=department, address=address, anleave=anleave, medleave=medleave, unleave=unleave, othour=othour, salary=salary, image_url=image_url)
 
+def filedownload():
+        empid = request.form['emp_id']
+        cursor = db_conn.cursor()
+        cursor.execute('SELECT emp_id FROM employee WHERE emp_id = %s', (empid))
+        emp_id = cursor.fetchone()
+
+        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+
+        url = boto3.client('s3').generate_presigned_url(
+            ClientMethod = 'get_object',
+            Params = {'Bucket': custombucket, 'Key':emp_image_file_name_in_s3},
+            ExpiresIn = 3600
+        )
+        print(+ url)
+
+        
 @app.route('/removedata', methods=['POST'])
 def DeleteData():
     if request.method == 'POST' and 'emp_id' in request.form:
