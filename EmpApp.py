@@ -252,6 +252,7 @@ def filedownload():
             ExpiresIn = 3600
         )
         print(url)
+        return url
 
         
 @app.route('/removedata', methods=['POST'])
